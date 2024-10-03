@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+
+  model_training:
+    build: 
+      context: .
+      dockerfile: Dockerfile_train
+    image: model_training_image:latest
+    container_name: model_training_container
+    volumes:
+      - .:/app
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile_api
+    image: api_image:latest
+    container_name: api_container
+    volumes:
+      - ".:/app"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - model_training
+
+
+    
+    
+
+
+
+  
+  

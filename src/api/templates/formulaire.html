@@ -1,0 +1,16 @@
+<!-- templates/formulaire.html -->
+{% extends "base.html" %}
+{% block title %}Prediction de Match{% endblock %}
+
+{% block content %}
+<h2>Prediction de Match</h2>
+<form action="{{ url_for('get_matches') }}" method="get">
+    <label for="journee">Journée:</label>
+    <select id="journee" name="jour">
+        {% for jour in jours %}
+        <option value="{{ jour }}">{{ jour }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Voir les matchs">
+</form>
+{% endblock %}

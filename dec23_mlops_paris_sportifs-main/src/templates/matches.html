@@ -1,0 +1,45 @@
+<!-- templates/matches.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Matchs pour la journée sélectionnée</h1>
+<ul>
+    {% for match in matches %}
+    <li>
+        {{ match['HomeTeam'] }} vs {{ match['AwayTeam'] }}
+        <form action="/predict" method="post">
+            <input type="hidden" name="HomeTeam" value="{{ match['HomeTeam'] }}">
+            <input type="hidden" name="AwayTeam" value="{{ match['AwayTeam'] }}">
+            <button type="submit">Prédire</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function predictMatch(event, form) {
+    event.preventDefault();  // Empêcher le formulaire de recharger la page
+    var formData = new FormData(form);
+    fetch('/predict', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert('Erreur : ' + data.error);
+        } else {
+            const resultElement = form.querySelector('.prediction-result');
+            resultElement.innerText = 'Résultat : ' + data.prediction + ' pour ' + data.homeTeam + ' contre ' + data.awayTeam;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Erreur lors de la prédiction');
+    });
+}
+</script>
+
+{% endblock %}

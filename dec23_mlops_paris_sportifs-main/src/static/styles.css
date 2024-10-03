@@ -1,0 +1,33 @@
+/* static/styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: url('/static/fond.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 2em auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+input[type="submit"], button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #0056b3;
+}
